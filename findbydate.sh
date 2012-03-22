@@ -2,11 +2,13 @@
 
 set -e
 
+# ./findbydate.sh "/hogedir" "20120301"
+
 # 対象ディレクトリと基準日をコマンドライン引数から取得
 readonly TARGET=$1
 readonly BASE_DATE=$2
 
-# 比較に使用する一時ファイルを作成
+# 比較に使用する一時ファイルの名前
 readonly TMP_START="start"
 
 # 作成日が指定された日のファイルを作成
