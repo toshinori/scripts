@@ -63,13 +63,17 @@ Pathname::glob(pattern).each do |copy_from|
   copy_to_dir = copy_to_base.join(copy_from.parent.basename)
   copy_to = copy_to_dir.join(copy_from.basename)
 
-  p copy_to
+  # 処理済みのファイルスキップ
+  if FileTest.exist?("#{copy_to}.bak")
+    puts "#{copy_to} was converted."
+    next
+  end
 
   # コピー先ディレクトリが存在するなら削除
-  if copy_to_dir.exist?
-    FileUtils.rm_rf(copy_to_dir.to_s)
-  end
-  copy_to_dir.mkdir
+  # if copy_to_dir.exist?
+    # FileUtils.rm_rf(copy_to_dir.to_s)
+  # end
+  copy_to_dir.mkdir unless copy_to_dir.exist?
 
   FileUtils.copy_file(copy_from.to_s, copy_to.to_s)
 
